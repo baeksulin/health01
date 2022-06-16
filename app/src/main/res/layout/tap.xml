@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/tap1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tap2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/tap2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="weight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tap3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tap1" />
+
+    <Button
+        android:id="@+id/tap3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="약"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tap4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tap2" />
+
+    <Button
+        android:id="@+id/tap4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="일정"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tap5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tap3" />
+
+    <Button
+        android:id="@+id/tap5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="MY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tap4" />
+</androidx.constraintlayout.widget.ConstraintLayout>

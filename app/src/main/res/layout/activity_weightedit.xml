@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WeighteditActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/tap"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/gender"
+        android:text="성별"
+        android:textSize="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:id="@+id/btn_genger"
+        android:text="남자"
+        android:textSize="18dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/gender"
+        app:layout_constraintBottom_toBottomOf="@id/gender"
+        app:layout_constraintLeft_toRightOf="@id/gender"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="30dp"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/height"
+        android:text="키"
+        android:textSize="20dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/btn_height"
+        app:layout_constraintBottom_toBottomOf="@id/btn_height"
+        app:layout_constraintLeft_toLeftOf="@id/gender"
+        app:layout_constraintRight_toRightOf="@id/gender"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:id="@+id/btn_height"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/btn_genger"
+        app:layout_constraintLeft_toLeftOf="@id/btn_genger"
+        app:layout_constraintRight_toRightOf="@id/btn_genger"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/gweight"
+        android:text="목표\n체중"
+        android:textSize="20dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/btn_gweight"
+        app:layout_constraintBottom_toBottomOf="@id/btn_gweight"
+        app:layout_constraintLeft_toLeftOf="@id/gender"
+        app:layout_constraintRight_toRightOf="@id/gender"/>
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:id="@+id/btn_gweight"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/btn_height"
+        app:layout_constraintLeft_toLeftOf="@id/btn_genger"
+        app:layout_constraintRight_toRightOf="@id/btn_genger"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/nweight"
+        android:text="현재\n체중"
+        android:textSize="20dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/btn_nweight"
+        app:layout_constraintBottom_toBottomOf="@id/btn_nweight"
+        app:layout_constraintLeft_toLeftOf="@id/gender"
+        app:layout_constraintRight_toRightOf="@id/gender"/>
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:id="@+id/btn_nweight"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@id/btn_gweight"
+        app:layout_constraintLeft_toLeftOf="@id/btn_genger"
+        app:layout_constraintRight_toRightOf="@id/btn_genger"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_cancel"
+        android:text="취소"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="70dp"/>
+    <Button
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:text="저장"
+        android:id="@+id/btn_save"
+        app:layout_constraintTop_toTopOf="@id/btn_cancel"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="40dp"/>
+
+
+
+        
+        
+
+</androidx.constraintlayout.widget.ConstraintLayout>
