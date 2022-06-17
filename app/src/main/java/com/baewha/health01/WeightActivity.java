@@ -16,7 +16,7 @@ import java.util.Calendar;
 
 public class WeightActivity extends AppCompatActivity {
     TextView tv_genger, tv_height, tv_gweight, tv_nweight;
-    Button btn_edit;
+    Button btn_edit, tap1, tap3, tap4, tap5;
     String height1, height2, gweight1, gweight2, nweight1, nweight2, today, date, height, gweight, nweight, dbid , genger;
     Database db;
     SQLiteDatabase sqlDB;
@@ -25,13 +25,11 @@ public class WeightActivity extends AppCompatActivity {
     boolean gweightCheck, dateCheck;
     ListView list_pweight;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weight);
-
+        setTitle("건강 지킴이 - 신체 정보");
         Intent i = getIntent();
         dbid = i.getStringExtra("아이디");
         db = new Database(this);
@@ -52,7 +50,7 @@ public class WeightActivity extends AppCompatActivity {
         selectData2(dbid); // 나이 불러오는 메소드
         selectData3(dbid);
     }
-
+    //finish로 돌아오면 화면 새로고침
     @Override
     protected void onResume() {
         super.onResume();
@@ -86,12 +84,48 @@ public class WeightActivity extends AppCompatActivity {
         tv_gweight = findViewById(R.id.tv_gweight);
         tv_nweight = findViewById(R.id.tv_nweight);
         list_pweight = findViewById(R.id.list_pweight);
+        tap1 = findViewById(R.id.tap1);
+        tap3 = findViewById(R.id.tap3);
+        tap4 = findViewById(R.id.tap4);
+        tap5 = findViewById(R.id.tap5);
     }
     public void btn(){
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), WeighteditActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SickActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CalActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MemeditActivity.class);
                 intent.putExtra("아이디", dbid);
                 startActivity(intent);
             }
@@ -104,9 +138,17 @@ public class WeightActivity extends AppCompatActivity {
         day = cal.get(Calendar.DAY_OF_MONTH);
 
         if(month<10){
-            today=year+"-0"+month+"-"+day;
+            if(day<10){
+                today=year+"-0"+month+"-0"+day;
+            }else{
+                today=year+"-0"+month+"-"+day;
+            }
         }else{
-            today=year+"-"+month+"-"+day;
+            if(day<10){
+                today=year+"-"+month+"-0"+day;
+            }else{
+                today=year+"-"+month+"-"+day;
+            }
         }
     }
     //입력한 목표 체중이 있는지 없는지 확인 없으면 아직 체중관련한 데이터를 입력하지 않은 것

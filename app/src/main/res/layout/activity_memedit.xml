@@ -53,6 +53,7 @@
         android:layout_height="55dp"
         android:id="@+id/ed_nowpw"
         android:hint="현재 비밀번호를 입력하세요"
+        android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/tv_id"
         app:layout_constraintLeft_toLeftOf="@id/tv_id"
         app:layout_constraintRight_toRightOf="@id/tv_id"
@@ -62,6 +63,7 @@
         android:layout_height="55dp"
         android:id="@+id/ed_newpw"
         android:hint="변경할 비밀번호를 입력하세요"
+        android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/ed_nowpw"
         app:layout_constraintLeft_toLeftOf="@id/tv_id"
         app:layout_constraintRight_toRightOf="@id/tv_id"
@@ -71,6 +73,7 @@
         android:layout_height="55dp"
         android:id="@+id/ed_newpwto"
         android:hint="다시 한번 입력하세요"
+        android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@id/ed_newpw"
         app:layout_constraintLeft_toLeftOf="@id/tv_id"
         app:layout_constraintRight_toRightOf="@id/tv_id"
@@ -117,7 +120,8 @@
         app:layout_constraintTop_toBottomOf="@id/ed_name"
         app:layout_constraintLeft_toLeftOf="@id/tv_id"
         app:layout_constraintRight_toRightOf="@id/tv_id"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rectangle3"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -139,7 +143,8 @@
         app:layout_constraintTop_toBottomOf="@id/btn_genger"
         app:layout_constraintLeft_toLeftOf="@id/tv_id"
         app:layout_constraintRight_toRightOf="@id/tv_id"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rectangle3"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -167,16 +172,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_cancel"
         android:text="취소"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="40dp"
-        android:layout_marginBottom="70dp"/>
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/rectangle3"/>
     <Button
         android:layout_width="145dp"
         android:layout_height="wrap_content"
         android:text="저장"
+        android:textSize="18dp"
         android:id="@+id/btn_save"
         app:layout_constraintTop_toTopOf="@id/btn_cancel"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="40dp"/>
+        android:layout_marginRight="40dp"
+        android:background="@drawable/rectangle3"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

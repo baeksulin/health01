@@ -44,7 +44,7 @@ public class PweightAdapter extends BaseAdapter {
         TextView tv_pweight = (TextView)convertView.findViewById(R.id.tv_pweight);
 
         PweightList plist = pweightlist.get(position);
-        tv_pweight.setText(plist.getwDate()+"\t\t\t"+plist.getwPweight()+"kg");
+        tv_pweight.setText("\t"+plist.getwDate()+"\t\t\t"+plist.getwPweight()+"kg");
 
         return convertView;
     }

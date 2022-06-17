@@ -41,18 +41,9 @@ public class Database extends SQLiteOpenHelper {
                 "sCheck   TEXT, "+
                 "FOREIGN KEY(sId) REFERENCES member(mId))";
 
-        String schedule = "CREATE TABLE IF NOT EXISTS schedule ("+
-                "scNum   INTEGER NOT NULL PRIMARY KEY autoincrement, "+
-                "scDate   TEXT NOT NULL, "+
-                "scTime   TEXT NOT NULL, "+
-                "scId   TEXT, "+
-                "scTxt   TEXT, "+
-                "FOREIGN KEY(scId) REFERENCES member(mId))";
-
         db.execSQL(member);
         db.execSQL(weight);
         db.execSQL(sick);
-        db.execSQL(schedule);
     }
 
     @Override

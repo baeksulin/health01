@@ -1,5 +1,6 @@
 package com.baewha.health01;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -38,7 +40,8 @@ public class SickeditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sickedit);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); // EditText에 입력할 때 layout은 그대로고 키보드만 생기게 하기
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("건강 지킴이 - 약 정보 수정");
         Intent i = getIntent();
         dbid = i.getStringExtra("아이디");
         db = new Database(this);
@@ -50,6 +53,17 @@ public class SickeditActivity extends AppCompatActivity {
             selectData(dbid);
         }
 
+    }
+    //뒤로가기
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

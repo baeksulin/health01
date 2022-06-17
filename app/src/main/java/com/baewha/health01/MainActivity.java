@@ -11,6 +11,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -25,12 +26,12 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn_gowe,btn_gocal, tap1, tap2, tap3, tap4, tap5;
+    Button btn_gowe,btn_gocal, tap2, tap3, tap4, tap5;
     String dbid, gweight, nweight, fweight, today;
     ProgressBar pb;
     Database db;
     SQLiteDatabase sqlDB;
-    String name, medcycle, start;
+    String name;
     TextView tv_hello, tv_percent, tv_today, tv_txt;
     private Permission permission;
     private long backBtnTime=0;
@@ -39,16 +40,15 @@ public class MainActivity extends AppCompatActivity {
     Calendar cal;
     Integer year, month, day;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); // EditText에 입력할 때 layout은 그대로고 키보드만 생기게 하기
         checkPermission();
-
+        setTitle("건강 지킴이");
         findId();
-        tap();
+        btn();
         todayDate();
 
         db = new Database(this);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         gweightCheck = checkGweight(dbid); // 입력된 목표 체중 있는지 확인 false면 없는 것
         dateCheck = checkDate(dbid, today); // 오늘 날짜로 입력된 체중이 있는지 확인 false면 없는 것
-        cycleCheck = checkCycle(dbid);
+
 
         if(gweightCheck==true){
             selectData2(dbid); //목표체중과 최근 체중 검색
@@ -69,16 +69,12 @@ public class MainActivity extends AppCompatActivity {
             if(dateCheck==true){
                 tv_hello.setText("\t\t안녕하세요\t"+name+"님\n\t\t오늘 입력하신 체중은\n\t\t\t\t"+nweight+"kg 입니다");
                 btn_gowe.setVisibility(View.INVISIBLE);
-                if(cycleCheck==true){
-                    selectData4(dbid);
-                }
             }else{
                 tv_hello.setText("안녕하세요\t"+name+"님\n 아직 체중을 입력하지 않았어요");
-           }
+            }
         }else{
-            //입력하러가기
+            tv_hello.setText("안녕하세요\t"+name+"님\n 아직 체중을 입력하지 않았어요");
         }
-
     }
 
     @Override
@@ -139,6 +135,11 @@ public class MainActivity extends AppCompatActivity {
         tv_today = findViewById(R.id.tv_today);
         tv_txt = findViewById(R.id.tv_txt);
         btn_gowe = findViewById(R.id.btn_gowe);
+        btn_gocal = findViewById(R.id.btn_gocal);
+        tap2 = findViewById(R.id.tap2);
+        tap3 = findViewById(R.id.tap3);
+        tap4 = findViewById(R.id.tap4);
+        tap5 = findViewById(R.id.tap5);
     }
     public void todayDate(){
         cal = Calendar.getInstance();
@@ -174,17 +175,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
-    //입력한 약 주기가 있는지 확인
-    public boolean checkCycle(String sid){
-        sqlDB = db.getReadableDatabase();
-        Cursor cursor = sqlDB.rawQuery("select sMedcycle from sick where sid = ? ;",new String[] {sid});
-        if(cursor.getCount()>0) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
     public void selectData1(String mId){
         sqlDB = db.getReadableDatabase();
         Cursor cursor= sqlDB.rawQuery("select mName from member where mId = ?;", new String[] {mId});
@@ -213,16 +203,6 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
         sqlDB.close();
     }
-    public void selectData4(String sId){
-        sqlDB = db.getReadableDatabase();
-        Cursor cursor= sqlDB.rawQuery("select sMedcycle, sStart from sick where sId = ?;", new String[] {sId});
-        while(cursor.moveToNext()){
-            medcycle = cursor.getString(0);
-            start = cursor.getString(1);
-        }
-        cursor.close();
-        sqlDB.close();
-    }
     public void setPb(){
         Double g = Double.valueOf(gweight); //목표체충
         Double f = Double.valueOf(fweight); //처음체중
@@ -233,16 +213,23 @@ public class MainActivity extends AppCompatActivity {
         pb.setProgress(nn);
         tv_percent.setText("현재 진행률은 "+String.valueOf(nn)+"% 입니다");
     }
-    public void setTxt(){
-        tv_txt.setText("업데이트가 필요한 ");
-
-    }
-    public void tap(){
-        tap2 = findViewById(R.id.tap2);
-        tap3 = findViewById(R.id.tap3);
-        tap4 = findViewById(R.id.tap4);
-        tap5 = findViewById(R.id.tap5);
-
+    public void btn(){
+        btn_gowe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), WeightActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        btn_gocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CalActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
         tap2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

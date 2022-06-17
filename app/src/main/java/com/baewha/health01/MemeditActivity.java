@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -22,7 +23,7 @@ import android.widget.Toast;
 public class MemeditActivity extends AppCompatActivity {
     TextView tv_id;
     EditText ed_nowpw, ed_newpw, ed_newpwto, ed_name, ed_email;
-    Button btn_genger, btn_age, btn_cancel, btn_save;
+    Button btn_genger, btn_age, btn_cancel, btn_save, tap1, tap2, tap3, tap4;
     Database db;
     SQLiteDatabase sqlDB;
     String id, pw, nowpw,newpw, newpwto, name, genger, age, email, dbid; // pw는 데베에서 불러오는 비밀번호, nowpw는 EditText에 입력하는 현재 비빌번호
@@ -31,7 +32,8 @@ public class MemeditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memedit);
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); // EditText에 입력할 때 layout은 그대로고 키보드만 생기게 하기
+        setTitle("건강 지킴이 - 회원 정보 수정");
         findId();
         db = new Database(this);
         Intent i = getIntent();
@@ -53,6 +55,10 @@ public class MemeditActivity extends AppCompatActivity {
         btn_age = findViewById(R.id.btn_age);
         btn_cancel = findViewById(R.id.btn_cancel);
         btn_save = findViewById(R.id.btn_save);
+        tap1 = findViewById(R.id.tap1);
+        tap2 = findViewById(R.id.tap2);
+        tap3 = findViewById(R.id.tap3);
+        tap4 = findViewById(R.id.tap4);
     }
     //버튼 메소드
     public void btn(){
@@ -78,6 +84,38 @@ public class MemeditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 save();
+            }
+        });
+        tap1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), WeightActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SickActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CalActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
             }
         });
     }

@@ -55,7 +55,8 @@
         app:layout_constraintTop_toBottomOf="@id/ed_hospital"
         app:layout_constraintLeft_toLeftOf="@id/ed_hospital"
         app:layout_constraintRight_toRightOf="@id/ed_hospital"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rectangle3"/>
 
     <TextView
         android:layout_width="40dp"
@@ -97,7 +98,8 @@
         app:layout_constraintTop_toBottomOf="@id/ed_sickname"
         app:layout_constraintLeft_toLeftOf="@id/ed_hospital"
         app:layout_constraintRight_toRightOf="@id/ed_hospital"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rectangle3"/>
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -116,7 +118,8 @@
         app:layout_constraintTop_toBottomOf="@id/btn_medcycle"
         app:layout_constraintLeft_toLeftOf="@id/ed_hospital"
         app:layout_constraintRight_toRightOf="@id/ed_hospital"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rectangle3"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -142,16 +145,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_cancel"
         android:text="취소"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="40dp"
-        android:layout_marginBottom="70dp"/>
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/rectangle3"/>
     <Button
         android:layout_width="145dp"
         android:layout_height="wrap_content"
         android:text="저장"
+        android:textSize="18dp"
         android:id="@+id/btn_save"
         app:layout_constraintTop_toTopOf="@id/btn_cancel"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="40dp"/>
+        android:layout_marginRight="40dp"
+        android:background="@drawable/rectangle3"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

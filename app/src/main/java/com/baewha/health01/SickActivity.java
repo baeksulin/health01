@@ -26,7 +26,7 @@ import android.widget.Toast;
 
 public class SickActivity extends AppCompatActivity {
     TextView tv_hospital, tv_sickname , tv_medcycle, tv_start, tv_check, tv_tell;
-    Button btn_edit;
+    Button btn_edit, tap1, tap2, tap4, tap5;
     String hospital, sickname, medcycle, start, check, dbid, tell;
     Database db;
     SQLiteDatabase sqlDB;
@@ -38,7 +38,7 @@ public class SickActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sick);
-
+        setTitle("건강 지킴이 - 약 정보");
         Intent i = getIntent();
         dbid = i.getStringExtra("아이디");
         db = new Database(this);
@@ -53,7 +53,7 @@ public class SickActivity extends AppCompatActivity {
             img_call.setVisibility(View.INVISIBLE);
         }
     }
-
+    //finish로 돌아오면 화면 새로고침
     @Override
     protected void onResume() {
         super.onResume();
@@ -83,6 +83,10 @@ public class SickActivity extends AppCompatActivity {
         tv_check = findViewById(R.id.tv_check);
         btn_edit = findViewById(R.id.btn_edit);
         img_call = findViewById(R.id.img_call);
+        tap1 = findViewById(R.id.tap1);
+        tap2 = findViewById(R.id.tap2);
+        tap4 = findViewById(R.id.tap4);
+        tap5 = findViewById(R.id.tap5);
     }
     public void btn(){
         btn_edit.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +112,38 @@ public class SickActivity extends AppCompatActivity {
                     getApplicationContext().startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
 
+            }
+        });
+        tap1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), WeightActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CalActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MemeditActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
             }
         });
     }

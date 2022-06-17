@@ -7,50 +7,67 @@
     <Button
         android:id="@+id/tap1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="main"
+        android:layout_height="50dp"
+        android:text="홈"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tap2"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#00000000"/>
 
     <Button
         android:id="@+id/tap2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="weight"
+        android:layout_height="50dp"
+        android:text="몸무게"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tap3"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tap1" />
+        app:layout_constraintStart_toEndOf="@+id/tap1"
+        android:background="#00000000"/>
 
     <Button
         android:id="@+id/tap3"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="약"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tap4"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tap2" />
+        app:layout_constraintStart_toEndOf="@+id/tap2"
+        android:background="#00000000"/>
 
     <Button
         android:id="@+id/tap4"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="일정"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tap5"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tap3" />
+        app:layout_constraintStart_toEndOf="@+id/tap3"
+        android:background="#00000000"/>
 
     <Button
         android:id="@+id/tap5"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="MY"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tap4" />
+        app:layout_constraintStart_toEndOf="@+id/tap4"
+        android:background="#00000000"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tap1"
+        android:background="#E0E0E0"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

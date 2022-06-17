@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.Toast;
@@ -33,8 +34,9 @@ public class WeighteditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weightedit);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); // EditText에 입력할 때 layout은 그대로고 키보드만 생기게 하기
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("회원님의 페이지??????");
+        getSupportActionBar().setTitle("건강 지킴이 - 신체 정보 수정");
 
         Intent i = getIntent();
         dbid = i.getStringExtra("아이디");
@@ -86,8 +88,6 @@ public class WeighteditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog_height(v);
-                //Toast.makeText(WeighteditActivity.this,height+"d", Toast.LENGTH_SHORT).show();
-
             }
         });
         btn_gweight.setOnClickListener(new View.OnClickListener() {

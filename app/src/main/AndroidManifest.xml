@@ -14,7 +14,6 @@
         android:theme="@style/Theme.Health01">
         <activity android:name=".SickeditActivity" />
         <activity android:name=".SickActivity" />
-        <activity android:name=".MypageActivity" />
         <activity android:name=".WeightActivity" />
         <activity android:name=".CalActivity" />
         <activity android:name=".MemeditActivity" />

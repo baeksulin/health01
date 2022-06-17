@@ -9,43 +9,43 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.baewha.health01.decorator.EventDecorator;
 import com.baewha.health01.decorator.MyselectionDecorator;
-import com.baewha.health01.decorator.OtherDacorator;
 import com.baewha.health01.decorator.SaturdayDecorator;
 import com.baewha.health01.decorator.SundayDecorator;
 import com.baewha.health01.decorator.TodayDecorator;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 public class CalActivity extends AppCompatActivity {
+    Button tap1, tap2, tap3, tap5;
     private MaterialCalendarView cal;
     Integer medcycle, year, month, day;
-    String start, dbid, today;
+    String start = "", dbid, today ="";
     Calendar calendar;
     Database db;
     SQLiteDatabase sqlDB;
     boolean cycleCheck;
-    TextView tv_txt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cal);
-
+        setTitle("건강 지킴이 - 일정");
+        findId();
+        btn();
         calendar = Calendar.getInstance();
         todayDate();
         Intent i = getIntent();
@@ -58,16 +58,54 @@ public class CalActivity extends AppCompatActivity {
         }else{
             medcycle=0;
         }
-        cal = findViewById(R.id.cal);
-        tv_txt = findViewById(R.id.tv_txt);
-        //cal.setSelectedDate(CalendarDay.today());
+
         cal.addDecorator(new MyselectionDecorator(this));
         cal.addDecorator(new SundayDecorator());
         cal.addDecorator(new SaturdayDecorator());
         cal.addDecorator(new TodayDecorator(this));
-        //cal.addDecorator(new OtherDacorator());
         cal.setHeaderTextAppearance(R.style.CalendarWidgetHeader);
         new Event().executeOnExecutor(Executors.newSingleThreadExecutor());
+    }
+    public void findId(){
+        cal = findViewById(R.id.cal);
+        tap1 = findViewById(R.id.tap1);
+        tap2 = findViewById(R.id.tap2);
+        tap3 = findViewById(R.id.tap3);
+        tap5 = findViewById(R.id.tap5);
+    }
+    public void btn(){
+        tap1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), WeightActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SickActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
+        tap5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MemeditActivity.class);
+                intent.putExtra("아이디", dbid);
+                startActivity(intent);
+            }
+        });
     }
     private class Event extends AsyncTask<Void, Void, List<CalendarDay>> {
 
@@ -106,7 +144,6 @@ public class CalActivity extends AppCompatActivity {
                 return;
             }
             cal.addDecorator(new EventDecorator(Color.RED, calendarDays));
-            //tv_txt.setText(Arrays.toString(new List[]{calendarDays}));
 
         }
     }

@@ -9,5 +9,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_pweight"
         android:textSize="18dp"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:padding="5dp"/>
 </LinearLayout>
