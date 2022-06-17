@@ -38,7 +38,7 @@ public class SickActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sick);
-        setTitle("건강 지킴이 - 약 정보");
+        setTitle("건강 지킴이 - 질병 정보");
         Intent i = getIntent();
         dbid = i.getStringExtra("아이디");
         db = new Database(this);
