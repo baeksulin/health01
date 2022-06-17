@@ -20,7 +20,7 @@ public class TodayDecorator implements DayViewDecorator {
     private final Drawable drawable;
     public TodayDecorator(Activity context){
         date = CalendarDay.today();
-        drawable = context.getResources().getDrawable(R.drawable.today);
+        drawable = context.getResources().getDrawable(R.drawable.select);
     }
 
     @Override
@@ -30,7 +30,9 @@ public class TodayDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.setBackgroundDrawable(drawable);
+        view.addSpan(new StyleSpan(Typeface.BOLD));
+        view.addSpan(new RelativeSizeSpan(1.3f));
+        view.addSpan(new ForegroundColorSpan(Color.BLACK));
 
     }
 

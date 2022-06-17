@@ -29,15 +29,15 @@ public class Database extends SQLiteOpenHelper {
                 "wHeight   TEXT, "+
                 "wGweight   TEXT, "+
                 "wNweight   TEXT, "+
-                "wPweight   TEXT, "+
                 "FOREIGN KEY(wId) REFERENCES member(mId))";
 
         String sick = "CREATE TABLE IF NOT EXISTS sick ("+
                 "sId   TEXT NOT NULL PRIMARY KEY, "+
                 "sHospital   TEXT NOT NULL, "+
+                "sTell TEXT, "+
                 "sSickname   TEXT NOT NULL, "+
-                "sMedcycle   TEXT, "+
-                "sStart   TEXT, "+
+                "sMedcycle   TEXT NOT NULL, "+
+                "sStart   TEXT NOT NULL, "+
                 "sCheck   TEXT, "+
                 "FOREIGN KEY(sId) REFERENCES member(mId))";
 

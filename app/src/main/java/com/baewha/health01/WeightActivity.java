@@ -51,8 +51,34 @@ public class WeightActivity extends AppCompatActivity {
         }
         selectData2(dbid); // 나이 불러오는 메소드
         selectData3(dbid);
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_weight);
+
+        Intent i = getIntent();
+        dbid = i.getStringExtra("아이디");
+        db = new Database(this);
+        findId();
+        btn();
+        todayDate();
+        gweightCheck = checkGweight(dbid); // 입력된 목표 체중 있는지 확인 false면 없는 것
+        dateCheck = checkDate(dbid, today); // 오늘 날짜로 입력된 체중이 있는지 확인 false면 없는 것
+
+        if(gweightCheck==true){ // true면 데이터 있음 -> 불러오기
+            if(dateCheck==true){ // 오늘 날짜로 입력된 데이터가 있으면 불러오기 없으면 오늘 날짜로 체중 입력
+                selectData1(dbid);
+            } else{
+                selectData1(dbid);
+                tv_nweight.setText("");
+            }
+        }
+        selectData2(dbid); // 나이 불러오는 메소드
+        selectData3(dbid);
+    }
+
     public void findId(){
         btn_edit = findViewById(R.id.btn_edit);
         tv_genger = findViewById(R.id.tv_genger);

@@ -17,7 +17,6 @@ public class SaturdayDecorator implements DayViewDecorator {
 
     }
 
-
     @Override
     public boolean shouldDecorate(CalendarDay day) {
         day.copyTo(cal);

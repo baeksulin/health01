@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -25,8 +26,8 @@ import java.util.Locale;
 
 public class SickeditActivity extends AppCompatActivity {
     EditText ed_hospital, ed_sickname, ed_check;
-    Button btn_medcycle, btn_start, btn_cancel, btn_save;
-    String hospital, sickname, medcycle, start, check, dbid;
+    Button btn_tell, btn_medcycle, btn_start, btn_cancel, btn_save;
+    String hospital, tell, sickname, medcycle, start, check, dbid;
     Database db;
     SQLiteDatabase sqlDB;
     Calendar cal;
@@ -50,16 +51,40 @@ public class SickeditActivity extends AppCompatActivity {
         }
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == RESULT_OK){
+            Cursor cursor = getContentResolver().query(data.getData(), new String[]{
+                    ContactsContract.CommonDataKinds.Phone.NUMBER}, null, null, null);
+
+            while(cursor.moveToNext()){
+                tell = cursor.getString(0);
+
+            }
+            cursor.close();
+            btn_tell.setText(tell);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
     public void findId(){
         ed_hospital = findViewById(R.id.ed_hospital);
         ed_sickname = findViewById(R.id.ed_sickname);
         ed_check = findViewById(R.id.ed_check);
+        btn_tell = findViewById(R.id.btn_tell);
         btn_medcycle = findViewById(R.id.btn_medcycle);
         btn_start = findViewById(R.id.btn_start);
         btn_cancel = findViewById(R.id.btn_cancel);
         btn_save = findViewById(R.id.btn_save);
     }
     public void btn(){
+        btn_tell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setData(ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                startActivityForResult(intent, 0);
+            }
+        });
         btn_medcycle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,11 +130,11 @@ public class SickeditActivity extends AppCompatActivity {
             }
         }else{
             if(sicknameCheck==true){
-                updateData(hospital, sickname, medcycle, start, check);
+                updateData(hospital, tell, sickname, medcycle, start, check);
                 Toast.makeText(SickeditActivity.this,"수정 완료", Toast.LENGTH_SHORT).show();
                 finish();
             }else{
-                insertData(dbid, hospital, sickname, medcycle, start, check);
+                insertData(dbid, hospital, tell, sickname, medcycle, start, check);
                 Toast.makeText(SickeditActivity.this,"저장 완료", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -128,31 +153,33 @@ public class SickeditActivity extends AppCompatActivity {
     }
     public void selectData(String sId){
         sqlDB = db.getReadableDatabase();
-        Cursor cursor = sqlDB.rawQuery("select sHospital, sSickname, sMedcycle, sStart, sCheck from sick where sId = ? ;",new String[] {sId});
+        Cursor cursor = sqlDB.rawQuery("select sHospital, sTell, sSickname, sMedcycle, sStart, sCheck from sick where sId = ? ;",new String[] {sId});
         while(cursor.moveToNext()){
             hospital = cursor.getString(0);
-            sickname = cursor.getString(1);
-            medcycle = cursor.getString(2);
-            start = cursor.getString(3);
-            check = cursor.getString(4);
+            tell = cursor.getString(1);
+            sickname = cursor.getString(2);
+            medcycle = cursor.getString(3);
+            start = cursor.getString(4);
+            check = cursor.getString(5);
         }
         cursor.close();
         sqlDB.close();
 
         ed_hospital.setText(hospital);
+        btn_tell.setText(tell);
         ed_sickname.setText(sickname);
-        btn_medcycle.setText(medcycle);
+        btn_medcycle.setText(medcycle+"일");
         btn_start.setText(start);
         ed_check.setText(check);
     }
-    public void insertData(String id, String hospital, String sickname, String medcycle, String start, String check){
+    public void insertData(String id, String hospital, String tell, String sickname, String medcycle, String start, String check){
         sqlDB = db.getWritableDatabase();
-        sqlDB.execSQL("insert into sick(sId, sHospital, sSickname, sMedcycle, sStart, sCheck) values "+"('"+id+"', '"+hospital+"','"+sickname+"', '"+medcycle+"','"+start+"','"+check+"');");
+        sqlDB.execSQL("insert into sick(sId, sHospital, sTell, sSickname, sMedcycle, sStart, sCheck) values "+"('"+id+"', '"+hospital+"','"+tell+"','"+sickname+"', '"+medcycle+"','"+start+"','"+check+"');");
         sqlDB.close();
     }
-    public void updateData(String hospital, String sickname, String medcycle, String start, String check){
+    public void updateData(String hospital, String tell, String sickname, String medcycle, String start, String check){
         sqlDB = db.getWritableDatabase();
-        sqlDB.execSQL("update sick set sHospital = '"+hospital+"', sSickname = '"+sickname+"', sMedcycle = '"+medcycle+"' , sStart = '"+start+"', sCheck = '"+check+"' where wid = '"+dbid+"';");
+        sqlDB.execSQL("update sick set sHospital = '"+hospital+"', sTell = '"+tell+"', sSickname = '"+sickname+"', sMedcycle = '"+medcycle+"' , sStart = '"+start+"', sCheck = '"+check+"' where sId = '"+dbid+"';");
         sqlDB.close();
     }
     //약 주기 설정 다이얼로그
@@ -172,7 +199,7 @@ public class SickeditActivity extends AppCompatActivity {
         np1.setMinValue(0);
 
         if (btn_medcycle.getText().toString() == "") { // 주기 현재 값 설정
-            np1.setValue(7);
+            np1.setValue(2);
         } else { // 선택한 값이 있으면 그 값으로 현재 값 보여주기
             int k2 = Integer.valueOf(medcycle);
             np1.setValue(k2);

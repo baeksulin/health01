@@ -10,6 +10,7 @@ import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import java.util.Calendar;
 
 public class SundayDecorator implements DayViewDecorator {
+
     private final Calendar cal = Calendar.getInstance();
 
     public SundayDecorator(){
