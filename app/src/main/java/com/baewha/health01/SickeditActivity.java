@@ -43,10 +43,10 @@ public class SickeditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("건강 지킴이 - 질병 정보 수정");
         Intent i = getIntent();
-        dbid = i.getStringExtra("아이디");
+        dbid = i.getStringExtra("아이디"); //로그인시 사용한 아이디 데이터 가져오기
         db = new Database(this);
 
-        findId();
+        findId(); //아이디 연결
         btn();
         sicknameCheck = checkSickname(dbid);
         if(sicknameCheck==true){ // 입력된 병원과 질병이 있는지 확인 true면 있다는 뜻
@@ -65,6 +65,7 @@ public class SickeditActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    //전화번호 가져오는 메소드
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode == RESULT_OK){
@@ -73,13 +74,13 @@ public class SickeditActivity extends AppCompatActivity {
 
             while(cursor.moveToNext()){
                 tell = cursor.getString(0);
-
             }
             cursor.close();
             btn_tell.setText(tell);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+    //아이디 연결
     public void findId(){
         ed_hospital = findViewById(R.id.ed_hospital);
         ed_sickname = findViewById(R.id.ed_sickname);

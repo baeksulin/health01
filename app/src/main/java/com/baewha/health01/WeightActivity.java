@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class WeightActivity extends AppCompatActivity {
@@ -31,9 +30,9 @@ public class WeightActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weight);
         setTitle("건강 지킴이 - 신체 정보");
         Intent i = getIntent();
-        dbid = i.getStringExtra("아이디");
+        dbid = i.getStringExtra("아이디"); //로그인시 사용한 아이디 데이터 가져오기
         db = new Database(this);
-        findId();
+        findId(); //아이디 연결
         btn();
         todayDate();
         gweightCheck = checkGweight(dbid); // 입력된 목표 체중 있는지 확인 false면 없는 것

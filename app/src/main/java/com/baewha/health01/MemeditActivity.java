@@ -34,14 +34,12 @@ public class MemeditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_memedit);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN); // EditText에 입력할 때 layout은 그대로고 키보드만 생기게 하기
         setTitle("건강 지킴이 - 회원 정보 수정");
-        findId();
+        findId(); // 아이디 찾는 메소드
         db = new Database(this);
         Intent i = getIntent();
-        dbid = i.getStringExtra("아이디");
+        dbid = i.getStringExtra("아이디"); //로그인한 아이디 데이터 받기
         selectData(dbid);
-
         btn();
-
     }
     // 아이디 연결시키는 메소드
     public void findId(){

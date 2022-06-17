@@ -11,8 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.Serializable;
-
 public class LoginActivity extends AppCompatActivity {
     EditText ed_id, ed_pw;
     Button btn_join, btn_login;
@@ -24,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle("건강 지킴이");
-        findId();
+        findId(); //아이디 연결
         db = new Database(this);
         btn();
 

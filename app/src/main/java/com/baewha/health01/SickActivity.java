@@ -1,14 +1,9 @@
 package com.baewha.health01;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -16,13 +11,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SickActivity extends AppCompatActivity {
     TextView tv_hospital, tv_sickname , tv_medcycle, tv_start, tv_check, tv_tell;
@@ -40,9 +32,9 @@ public class SickActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sick);
         setTitle("건강 지킴이 - 질병 정보");
         Intent i = getIntent();
-        dbid = i.getStringExtra("아이디");
+        dbid = i.getStringExtra("아이디"); // 로그인시 사용한 아이디 데이터 받기
         db = new Database(this);
-        findId();
+        findId(); //아이디 연결
         btn();
         sicknameCheck = checkSickname(dbid);
         tellCheck = checkTell(dbid);

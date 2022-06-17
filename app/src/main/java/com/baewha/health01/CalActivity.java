@@ -44,12 +44,12 @@ public class CalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cal);
         setTitle("건강 지킴이 - 일정");
-        findId();
+        findId(); //아이디 연결
         btn();
         calendar = Calendar.getInstance();
         todayDate();
         Intent i = getIntent();
-        dbid = i.getStringExtra("아이디");
+        dbid = i.getStringExtra("아이디"); //로그인한 아이디 데이터 값 받아오기
         db = new Database(this);
 
         cycleCheck = checkCycle(dbid);
@@ -58,7 +58,7 @@ public class CalActivity extends AppCompatActivity {
         }else{
             medcycle=0;
         }
-
+        //MaterialCalendarView에 Decorator 추가
         cal.addDecorator(new MyselectionDecorator(this));
         cal.addDecorator(new SundayDecorator());
         cal.addDecorator(new SaturdayDecorator());
@@ -66,6 +66,7 @@ public class CalActivity extends AppCompatActivity {
         cal.setHeaderTextAppearance(R.style.CalendarWidgetHeader);
         new Event().executeOnExecutor(Executors.newSingleThreadExecutor());
     }
+    //아이디 연결하기
     public void findId(){
         cal = findViewById(R.id.cal);
         tap1 = findViewById(R.id.tap1);
@@ -107,6 +108,7 @@ public class CalActivity extends AppCompatActivity {
             }
         });
     }
+    //MaterialCalendarView를 사용하기 위한 Event 클래스
     private class Event extends AsyncTask<Void, Void, List<CalendarDay>> {
 
         @Override
@@ -118,7 +120,7 @@ public class CalActivity extends AppCompatActivity {
                 Date date2 = dateFormat.parse(today); // 오늘
 
                 long Sec = (date1.getTime() - date2.getTime()) / 1000; // 초
-                long Days = Sec / (24*60*60); // 일자수 비교
+                long Days = Sec / (24*60*60); // 약 시작일과 오늘 일자수 비교
 
                 if(date1.before(date2)){ // date1이 date2보다 먼저인지? => true
                     calendar.add(Calendar.DAY_OF_MONTH, (int) Days); //Days 후 부터 시작
@@ -127,7 +129,7 @@ public class CalActivity extends AppCompatActivity {
                 }
             } catch (ParseException ex) {
             }
-
+            //여기까지 하면 질병 정보 화면에서 선택한 시작일로 캘린더를 시작할 수 있음
             ArrayList<CalendarDay> dates = new ArrayList<>();
             for(int i = 0; i < 100; i++){
                 CalendarDay days = CalendarDay.from(calendar);
@@ -136,6 +138,7 @@ public class CalActivity extends AppCompatActivity {
             }
             return dates;
         }
+        //약 주기마다 빨간 점 찍어주기
         @Override
         protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
             super.onPostExecute(calendarDays);
@@ -144,7 +147,6 @@ public class CalActivity extends AppCompatActivity {
                 return;
             }
             cal.addDecorator(new EventDecorator(Color.RED, calendarDays));
-
         }
     }
     //입력한 질병주기가 있는지 확인
@@ -158,6 +160,7 @@ public class CalActivity extends AppCompatActivity {
             return false;
         }
     }
+    //데이터베이스에서 데이터 검색
     public void selectData(String sId){
         sqlDB = db.getReadableDatabase();
         Cursor cursor = sqlDB.rawQuery("select sMedcycle, sStart from sick where sId = ? ;",new String[] {sId});
@@ -168,6 +171,7 @@ public class CalActivity extends AppCompatActivity {
         cursor.close();
         sqlDB.close();
     }
+    //오늘 날짜 검색
     public void todayDate(){
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH)+1;

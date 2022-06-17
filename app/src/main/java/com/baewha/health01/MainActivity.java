@@ -16,14 +16,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Button btn_gowe,btn_gocal, tap2, tap3, tap4, tap5;
@@ -65,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         if(gweightCheck==true){
             selectData2(dbid); //목표체중과 최근 체중 검색
             selectData3(dbid); //최초체중 검색
-            setPb();
+            setPb(); //프로그레스바에 현재 진행률 나타내는 메소드
             if(dateCheck==true){
                 tv_hello.setText("\t\t안녕하세요\t"+name+"님\n\t\t오늘 입력하신 체중은\n\t\t\t\t"+nweight+"kg 입니다");
                 btn_gowe.setVisibility(View.INVISIBLE);
@@ -76,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             tv_hello.setText("안녕하세요\t"+name+"님\n 아직 체중을 입력하지 않았어요");
         }
     }
-
+    //뒤로가기 누르면 뜨는 창
     @Override
     public void onBackPressed() {
         long curTime = System.currentTimeMillis();
@@ -105,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // 권한 체크
+    //전화 걸기 위해 필요한 권한 설정
     private void checkPermission() {
         // PermissionSupport.java 클래스 객체 생성
         permission = new Permission(this, this);
@@ -141,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         tap4 = findViewById(R.id.tap4);
         tap5 = findViewById(R.id.tap5);
     }
+    //오늘 날짜 찾기
     public void todayDate(){
         cal = Calendar.getInstance();
         year = cal.get(Calendar.YEAR);
@@ -203,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
         sqlDB.close();
     }
+    //프로그레스바에 현재 진행률 나타내기
     public void setPb(){
         Double g = Double.valueOf(gweight); //목표체충
         Double f = Double.valueOf(fweight); //처음체중
@@ -218,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), WeightActivity.class);
-                intent.putExtra("아이디", dbid);
+                intent.putExtra("아이디", dbid); // 로그인한 아이디 데이터 보내기
                 startActivity(intent);
             }
         });

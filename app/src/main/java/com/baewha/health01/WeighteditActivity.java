@@ -39,9 +39,9 @@ public class WeighteditActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("건강 지킴이 - 신체 정보 수정");
 
         Intent i = getIntent();
-        dbid = i.getStringExtra("아이디");
+        dbid = i.getStringExtra("아이디"); //로그인시 사용한 아이디 데이터 가져오기
         db = new Database(this);
-        findId();
+        findId(); //아이디 연결
         btn();
         todayDate();
         gweightCheck = checkGweight(dbid); // 입력된 목표 체중 있는지 확인 false면 없는 것
@@ -56,7 +56,6 @@ public class WeighteditActivity extends AppCompatActivity {
             }
         }
         selectData2(dbid); // 나이 불러오는 메소드
-
     }
     //뒤로가기
     @Override
